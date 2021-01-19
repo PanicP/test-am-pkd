@@ -32,7 +32,7 @@ const Card = ({ isCompact, name, imgUrl, hp, attacks, weaknesses }) => {
   const happinessList = () => {
     const list = []
     for (let i = 0; i < calculatedHappiness; i++) {
-      list.push(<img src={cuteImg} alt="cute.png" width="48" height="48"></img>)
+      list.push(<img key={ i } src={cuteImg} alt="cute.png" width="48" height="48"></img>)
     }
     return [...list]
   }

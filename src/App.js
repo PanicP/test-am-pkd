@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import { get } from 'lodash'
 
 import Card from './components/card/Card'
 import Footer from './components/layout/Footer'
+import PokemonApi from './services/api/pokemon'
 
 const testData = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 const pikachu = {
@@ -16,17 +18,26 @@ const pikachu = {
 }
 
 const App = () => {
+
+  const getPokemons = async () => {
+    const data = await PokemonApi.getPokemons()
+    const cards = get(data, 'data.cards', [])
+    console.log(cards)
+  }
+
   return (
     <div className="App">
       <MainContainer>
         <HeaderContainer>
           <HeaderLabel>Pokedex</HeaderLabel>
+          <button onClick={getPokemons}>test api</button>
         </HeaderContainer>
         <SelectedCardListContainer>
           <SelectedCardList>
-            {testData.map((data) => (
+            {testData.map((data, index) => (
               // <SelectedCard>{data}</SelectedCard>
               <Card
+                key={ index }
                 name={pikachu.name}
                 imgUrl={pikachu.imageUrl}
                 hp={pikachu.hp}
