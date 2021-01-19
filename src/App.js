@@ -67,6 +67,8 @@ const SelectedCardListContainer = styled.div`
   /* grid-row-start: 2;
   grid-row-end: 3; */
   min-height: calc(768px - 96px - 112px);
+  max-height: calc(768px - 96px - 112px);
+  overflow-y: auto;
   background-color: white;
 `
 
