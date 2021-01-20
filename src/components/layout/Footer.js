@@ -1,11 +1,17 @@
 import styled from 'styled-components'
+import useUtils from '../../store/utils/store'
+import { colors } from '../../static/color'
 
 const Footer = () => {
+  const { handleSetIsShowSearchModal } = useUtils()
+
   return (
     <>
       <FooterContainer>
         <AddButtonContainer>
-          <AddButton></AddButton>
+          <AddButton onClick={() => handleSetIsShowSearchModal({ isShowSearchModal: true })}>
+            <PlusIcon>+</PlusIcon>
+          </AddButton>
         </AddButtonContainer>
       </FooterContainer>
     </>
@@ -13,10 +19,11 @@ const Footer = () => {
 }
 
 const FooterContainer = styled.div`
-  background-color: red;
+  background-color: ${ colors.bottomBarBackground };
+  border-top: 3px solid ${ colors.bottomBarBoxShadow };
   position: absolute;
   bottom: 0;
-  height: 96px;
+  height: 72px;
   width: 100%;
   z-index: 1;
 `
@@ -30,15 +37,29 @@ const AddButtonContainer = styled.div`
 const AddButton = styled.div`
   width: 120px;
   height: 60px;
-  background-color: red;
+  background-color: ${ colors.bottomBarBackground };
   border-top-left-radius: 66px;
   border-top-right-radius: 66px;
-  border: 6px solid darkred;
+  border: 3px solid ${ colors.bottomBarBoxShadow };
   border-bottom: 0;
 
   position: absolute;
   left: calc(50% - 60px);
   top: -50px;
+
+  :hover {
+    cursor: pointer;
+  }
+`
+
+const PlusIcon = styled.div`
+  font-family: Atma;
+  color: ${ colors.bottomBarTextColor };
+  font-size: 96px;
+
+  position: absolute;
+  left: calc(50% - 24px);
+  top: -8px;
 
 `
 

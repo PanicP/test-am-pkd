@@ -19,6 +19,9 @@ const GaugeContainer = styled.div`
 const Label = styled.p`
   margin: 0;
   flex: 2;
+  font-family: Atma;
+  font-size: 24px;
+  line-height: 1.3;
 `
 
 const PercentageGaugeContainer = styled.div`

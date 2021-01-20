@@ -45,11 +45,21 @@ const Card = ({
 
   const happinessList = () => {
     const list = []
-    for (let i = 0; i < calculatedHappiness; i++) {
-      list.push(
-        <img key={i} src={cuteImg} alt="cute.png" width="48" height="48"></img>
-      )
+    if (calculatedHappiness >= 5 && mode === 'compact') {
+      for (let i = 0; i < 5; i++) {
+        list.push(
+          <img key={i} src={cuteImg} alt="cute.png" width="48" height="48" />
+        )
+      }
+      list.push(<Ellipsis>...</Ellipsis>)
+    } else {
+      for (let i = 0; i < calculatedHappiness; i++) {
+        list.push(
+          <img key={i} src={cuteImg} alt="cute.png" width="48" height="48" />
+        )
+      }
     }
+
     return [...list]
   }
 
@@ -66,63 +76,72 @@ const Card = ({
   const handleRemove = () => {
     handleRemoveSelectedPokemon({ nationalPokedexNumber })
   }
-  // useEffect(() => {
-  //   console.log('isCardHovered', name, isCardHovered)
-  // }, [isCardHovered])
 
-  // console.log(
-  //   name,
-  //   ' hp: ',
-  //   calculatedHp,
-  //   ' str: ',
-  //   calculatedStr,
-  //   ' wkn: ',
-  //   calculatedWeakness,
-  //   ' dmg: ',
-  //   calculatedDmg,
-  //   ' hpn: ',
-  //   calculatedHappiness
-  // )
   return (
-    <CardContainer ref={refCard}>
+    <CardContainer ref={refCard} mode={mode}>
       <LeftPart>
         <CardPicture src={imgUrl} alt={name} width="150" height="220" />
       </LeftPart>
       <RightPart>
         {
-        // (isCardHovered || isAddButtonHovered) && 
-        mode === 'search' && (
-          <AddButton ref={refAddButton} onClick={handleAdd}>
-            Add
-          </AddButton>
-        )}
+          // (isCardHovered || isAddButtonHovered) &&
+          mode === 'default' && (
+            <AddButton ref={refAddButton} onClick={handleAdd}>
+              Add
+            </AddButton>
+          )
+        }
         {
-        // (isCardHovered || isDeleteHovered) &&
-         mode === 'display' && (
-          <DeleteButton ref={refDeleteButton} onClick={handleRemove}>
-            X
-          </DeleteButton>
-        )}
+          // (isCardHovered || isDeleteHovered) &&
+          mode === 'compact' && (
+            <DeleteButton ref={refDeleteButton} onClick={handleRemove}>
+              X
+            </DeleteButton>
+          )
+        }
         <CardTitle>{name.toUpperCase()}</CardTitle>
-        <Stat>
+        <Stat mode={mode}>
           <Gauge label="HP" percentage={calculatedHp} />
-          <Gauge label="Str" percentage={calculatedStr} />
-          <Gauge label="Weak" percentage={calculatedWeakness} />
+          <Gauge label="STR" percentage={calculatedStr} />
+          <Gauge label="WEAK" percentage={calculatedWeakness} />
         </Stat>
         <HappinessGauge>{happinessList().map((icon) => icon)}</HappinessGauge>
       </RightPart>
     </CardContainer>
   )
 }
+/* width: ${ props => props.mode === 'compact' ? calc(50% - 16px) : calc(100% - 16px) }; */
+// const CardContainer = styled.div`
+//   display: flex;
+//   position: relative;
+//   width: calc(50% - 16px);
+//   border: 3px solid ${ colors.cardBoxShadow };
+//   border-radius: 1px;
+//   margin: 4px;
+//   background-color: ${colors.cardBackground};
 
+//   :hover {
+//     border: 3px solid ${ colors.cardBoxShadowHover };
+//   }
+// `
+
+// width: calc(100% - 8px);
 const CardContainer = styled.div`
   display: flex;
+  /* flex: 1; */
   position: relative;
-  width: calc(50% - 16px);
-  border: 2px solid lightgrey;
+  ${(props) =>
+    props.mode === 'compact'
+      ? 'width: calc(50% - 16px);'
+      : 'width: calc(100% - 8px - 6px);'}
+  border: 3px solid ${colors.cardBoxShadow};
   border-radius: 1px;
   margin: 4px;
   background-color: ${colors.cardBackground};
+
+  :hover {
+    border: 3px solid ${colors.cardBoxShadowHover};
+  }
 `
 
 const LeftPart = styled.div`
@@ -139,28 +158,56 @@ const RightPart = styled.div`
 `
 
 const AddButton = styled.div`
+  font-family: Atma;
+  font-size: 36px;
+  line-height: 1;
+  color: ${colors.colorAddButton};
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 16px;
+  top: 16px;
+
+  :hover {
+    cursor: pointer;
+  }
 `
 
 const DeleteButton = styled.div`
+  font-family: Atma;
+  font-size: 36px;
+  line-height: 1;
+  color: ${colors.colorAddButton};
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 16px;
+  top: 16px;
+
+  :hover {
+    cursor: pointer;
+  }
 `
 
 const CardPicture = styled.img``
 
-const CardTitle = styled.p``
+const CardTitle = styled.p`
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.3;
+`
 
 const Stat = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 8px;
+  ${(props) => (props.mode === 'compact' ? 'width: 100%;' : 'width: 70%')}
 `
 
 const HappinessGauge = styled.div`
   display: flex;
+  margin-top: 8px;
+`
+
+const Ellipsis = styled.div`
+  font-size: 48px;
+  color: #f7b239;
 `
 
 export default Card

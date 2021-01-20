@@ -26,8 +26,7 @@ const App = () => {
     <div className="App">
       <MainContainer>
         <HeaderContainer>
-          <HeaderLabel>Pokedex</HeaderLabel>
-          <button onClick={() => handleSetIsShowSearchModal({ isShowSearchModal: true })}>test api</button>
+          <HeaderLabel>My Pokedex</HeaderLabel>
         </HeaderContainer>
         <SelectedCardListContainer>
           <SelectedCardList>
@@ -41,7 +40,7 @@ const App = () => {
                 hp={pokemon.hp}
                 attacks={pokemon.attacks}
                 weaknesses={pokemon.weaknesses}
-                mode="display"
+                mode="compact"
               />
             ))}
           </SelectedCardList>
@@ -55,31 +54,25 @@ const App = () => {
 }
 
 const MainContainer = styled.div`
-  
-  /* display: flex;
-  flex-direction: column; */
-  /* grid-template-rows: 25% auto; */
+
 `
 
 const HeaderContainer = styled.div`
-  /* flex: 1; */
-  /* grid-row-start: 1;
-  grid-row-end: 2; */
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 112px;
-  background-color: blue;
 `
 
 const HeaderLabel = styled.p`
   margin: 0;
+  font-family: Atma;
+  font-size: 48px;
 `
 
 const SelectedCardListContainer = styled.div`
-  /* flex: 1; */
-  /* grid-row-start: 2;
-  grid-row-end: 3; */
-  min-height: calc(768px - 96px - 112px);
-  max-height: calc(768px - 96px - 112px);
+  min-height: calc(768px - 72px - 112px);
+  max-height: calc(768px - 72px - 112px);
   overflow-y: auto;
   background-color: white;
 `
@@ -87,13 +80,6 @@ const SelectedCardListContainer = styled.div`
 const SelectedCardList = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  /* :nth-child(even) {
-    margin-right: 4px
-  }
-
-  :nth-child(odd) {
-  } */
 `
 
 export default App

@@ -3,7 +3,7 @@ import instance from '../instance'
 const getPokemons = () =>
 	instance.httpPokemon({
 		method: 'get',
-		url: '/api/cards'
+		url: '/api/cards?limit=999'
 	})
 
 export default {

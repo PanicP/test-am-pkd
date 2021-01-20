@@ -22,7 +22,7 @@ export const colors = {
   levelTubeValueBackground: '#f3701a',
   bottomBarBackground: '#ec5656',
   bottomBarBoxShadow: '#d9333387',
-  bottomBarTextC010r: '#ffffff',
+  bottomBarTextColor: '#ffffff',
   modalOutside: '#000000a3',
   modalContentBoxShadow: '#474444',
   modalContentBackground: '#ffffff',
