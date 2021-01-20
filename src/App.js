@@ -7,36 +7,16 @@ import SearchModal from './components/modal/SearchModal'
 import usePokemon from './store/pokemon/store'
 import useUtils from './store/utils/store'
 
-// const testData = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-// const pikachu = {
-//   name: 'Pikachu',
-//   hp: 110,
-//   attacks: [
-//     { name: 'attack A', damage: '20+' },
-//     { name: 'attack B', damage: '40x' },
-//   ],
-//   weaknesses: [{ name: 'weakness A' }],
-//   imageUrl: 'https://images.pokemontcg.io/ex8/98.png',
-// }
-
 const App = () => {
 
-  // const getPokemons = async () => {
-  //   const data = await PokemonApi.getPokemons()
-  //   const cards = get(data, 'data.cards', [])
-  //   console.log(cards)
-  // }
-
-  const { pokemonsData, handleGetPokemons } = usePokemon()
+  const { pokemonsData, selectedPokemonsData, handleGetPokemons, handleSetSearchedPokemonByKeyword } = usePokemon()
   const { isShowSearchModal, handleSetIsShowSearchModal } = useUtils()
 
+  // constructor
   useEffect(() => {
     handleGetPokemons()
+    // handleSetSearchedPokemonByKeyword({ keyword: ' ' })
   }, [])
-
-  // useEffect(() => {
-  //   console.log('pokemonsData', pokemonsData)
-  // }, [pokemonsData])
 
   // useEffect(() => {
   //   console.log('isShowSearchModal', isShowSearchModal)
@@ -52,14 +32,16 @@ const App = () => {
         <SelectedCardListContainer>
           <SelectedCardList>
             {/* {testData.map((pokemon, index) => ( */}
-            {pokemonsData.map((pokemon, index) => (
+            {selectedPokemonsData.map((pokemon, index) => (
               <Card
                 key={ index }
                 name={pokemon.name}
+                nationalPokedexNumber={ pokemon.nationalPokedexNumber }
                 imgUrl={pokemon.imageUrl}
                 hp={pokemon.hp}
                 attacks={pokemon.attacks}
                 weaknesses={pokemon.weaknesses}
+                mode="display"
               />
             ))}
           </SelectedCardList>

@@ -12,11 +12,22 @@ code {
     monospace;
 } */
 
+@font-face {
+  font-family: 'Gaegu';
+  src: local('Gaegu'), url(./static/font/Gaegu-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Atma';
+  src: local('Atma'), url(./static/font/Atma-Bold.ttf) format('truetype');
+}
+
 body {
   margin: 0;
   padding: 0;
   /*font-family: sans-serif;*/
-  font-family: 'Atma', cursive;
+  /* font-family: 'Atma', cursive; */
+  font-family: 'Gaegu', 'Atma';
 }
 
 #root {

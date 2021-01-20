@@ -30,8 +30,46 @@ export const pokemonSlice = createSlice({
       // state = state
       // state.data = [1,2]
     },
-    addSelectedPokemon: (state, action) => {},
-    removeSelectedPokemon: (state, action) => {},
+    addSelectedPokemon: (state, action) => {
+      const nationalPokedexNumber = action.payload.nationalPokedexNumber
+      let selectedPokemon
+
+      state.pokemons = state.pokemons.reduce((newPokemons, pokemon) => {
+        if(pokemon.nationalPokedexNumber === nationalPokedexNumber) {
+          selectedPokemon = {...pokemon}
+          return [...newPokemons]
+        } else {
+          return [...newPokemons, pokemon]
+        }
+      }, [])
+
+      state.searchedPokemons = state.searchedPokemons.reduce((newPokemons, pokemon) => {
+        if(pokemon.nationalPokedexNumber === nationalPokedexNumber) {
+          selectedPokemon = {...pokemon}
+          return [...newPokemons]
+        } else {
+          return [...newPokemons, pokemon]
+        }
+      }, [])
+
+      state.selectedPokemons = [...state.selectedPokemons, selectedPokemon]
+    },
+    removeSelectedPokemon: (state, action) => {
+      const nationalPokedexNumber = action.payload.nationalPokedexNumber
+      let selectedPokemon
+
+      state.selectedPokemons = state.selectedPokemons.reduce((newPokemons, pokemon) => {
+        if(pokemon.nationalPokedexNumber === nationalPokedexNumber) {
+          selectedPokemon = {...pokemon}
+          return [...newPokemons]
+        } else {
+          return [...newPokemons, pokemon]
+        }
+      }, [])
+
+      state.searchedPokemons = [...state.searchedPokemons, selectedPokemon]
+      state.pokemons = [...state.pokemons, selectedPokemon]
+    },
     setSearchedPokemonByKeyword: (state, action) => {
       // name and type
       const keyword = action.payload.keyword
@@ -46,6 +84,7 @@ export const pokemonSlice = createSlice({
   extraReducers: {
     [getPokemonsTrunk.fulfilled]: (state, action) => {
       state.pokemons = action.payload
+      state.searchedPokemons = action.payload
     },
     [getPokemonsTrunk.rejected]: (state, action) => {
       state.pokemons = {}

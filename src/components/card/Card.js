@@ -1,7 +1,10 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import cuteImg from '../../static/image/cute.png'
 import { colors } from '../../static/color'
 import Gauge from './Gauge'
+import useHover from '../utils/useHover'
+import usePokemon from '../../store/pokemon/store'
 
 const hpCalculation = ({ hp }) => (hp > 100 ? 100 : hp < 0 ? 0 : hp)
 
@@ -19,7 +22,15 @@ const damageCalculation = ({ attacks }) =>
       }, 0)
     : 0
 
-const Card = ({ isCompact, name, imgUrl, hp, attacks, weaknesses }) => {
+const Card = ({
+  mode,
+  name,
+  nationalPokedexNumber,
+  imgUrl,
+  hp,
+  attacks,
+  weaknesses,
+}) => {
   // console.log(isCompact, name, imgUrl, hp, attacks, weaknesses)
   const calculatedHp = hpCalculation({ hp: parseInt(hp) })
   const calculatedStr = strCalculation({
@@ -30,10 +41,8 @@ const Card = ({ isCompact, name, imgUrl, hp, attacks, weaknesses }) => {
   })
   const calculatedDmg = damageCalculation({ attacks })
   const calculatedHappiness =
-    ((calculatedHp / 10) + 
-    (calculatedDmg / 10) - 
-    (calculatedWeakness / 100) + 
-    10) / 5
+    (calculatedHp / 10 + calculatedDmg / 10 - calculatedWeakness / 100 + 10) / 5
+
   const happinessList = () => {
     const list = []
     for (let i = 0; i < calculatedHappiness; i++) {
@@ -43,8 +52,26 @@ const Card = ({ isCompact, name, imgUrl, hp, attacks, weaknesses }) => {
     }
     return [...list]
   }
+
+  const [refCard, isCardHovered] = useHover()
+  const [refAddButton, isAddButtonHovered] = useHover()
+  const [refDeleteButton, isDeleteHovered] = useHover()
+  const { handleAddSelectedPokemon, handleRemoveSelectedPokemon } = usePokemon()
+
+  const handleAdd = () => {
+    console.log('add')
+    handleAddSelectedPokemon({ nationalPokedexNumber })
+  }
+
+  const handleRemove = () => {
+    handleRemoveSelectedPokemon({ nationalPokedexNumber })
+  }
+  // useEffect(() => {
+  //   console.log('isCardHovered', name, isCardHovered)
+  // }, [isCardHovered])
+
   // console.log(
-  //   name, 
+  //   name,
   //   ' hp: ',
   //   calculatedHp,
   //   ' str: ',
@@ -57,12 +84,26 @@ const Card = ({ isCompact, name, imgUrl, hp, attacks, weaknesses }) => {
   //   calculatedHappiness
   // )
   return (
-    <CardContainer>
+    <CardContainer ref={refCard}>
       <LeftPart>
         <CardPicture src={imgUrl} alt={name} width="150" height="220" />
       </LeftPart>
       <RightPart>
-        <CardTitle>{name}</CardTitle>
+        {
+        // (isCardHovered || isAddButtonHovered) && 
+        mode === 'search' && (
+          <AddButton ref={refAddButton} onClick={handleAdd}>
+            Add
+          </AddButton>
+        )}
+        {
+        // (isCardHovered || isDeleteHovered) &&
+         mode === 'display' && (
+          <DeleteButton ref={refDeleteButton} onClick={handleRemove}>
+            X
+          </DeleteButton>
+        )}
+        <CardTitle>{name.toUpperCase()}</CardTitle>
         <Stat>
           <Gauge label="HP" percentage={calculatedHp} />
           <Gauge label="Str" percentage={calculatedStr} />
@@ -76,6 +117,7 @@ const Card = ({ isCompact, name, imgUrl, hp, attacks, weaknesses }) => {
 
 const CardContainer = styled.div`
   display: flex;
+  position: relative;
   width: calc(50% - 16px);
   border: 2px solid lightgrey;
   border-radius: 1px;
@@ -94,6 +136,18 @@ const RightPart = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 16px;
+`
+
+const AddButton = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+`
+
+const DeleteButton = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
 `
 
 const CardPicture = styled.img``

@@ -6,3 +6,4 @@ export const isShowSearchModalSelector = () =>
         (state) => state.utils,
         (utils) => get(utils, 'isShowSearchModal', false)
     )
+

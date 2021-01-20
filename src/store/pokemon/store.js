@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
-import { getPokemonsTrunk, setSearchedPokemonByKeyword } from './slice'
+import {
+  getPokemonsTrunk,
+  setSearchedPokemonByKeyword,
+  addSelectedPokemon,
+  removeSelectedPokemon,
+} from './slice'
 import {
   pokemonsSelector,
   selectedPokemonsSelector,
@@ -29,12 +34,27 @@ const usePokemon = () => {
     [dispatch]
   )
 
+  const handleAddSelectedPokemon = useCallback(
+    ({ nationalPokedexNumber }) => {
+      dispatch(addSelectedPokemon({ nationalPokedexNumber }))
+    },
+    [dispatch]
+  )
+  const handleRemoveSelectedPokemon = useCallback(
+    ({ nationalPokedexNumber }) => {
+      dispatch(removeSelectedPokemon({ nationalPokedexNumber }))
+    },
+    [dispatch]
+  )
+
   return {
     pokemonsData,
     selectedPokemonsData,
     searchedPokemonsData,
     handleGetPokemons,
-    handleSetSearchedPokemonByKeyword
+    handleSetSearchedPokemonByKeyword,
+    handleAddSelectedPokemon,
+    handleRemoveSelectedPokemon,
   }
 }
 

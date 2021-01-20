@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import Card from '../card/Card'
 import useUtils from '../../store/utils/store'
 import usePokemon from '../../store/pokemon/store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const SearchModal = () => {
-  const { searchedPokemonsData, handleSetSearchedPokemonByKeyword } = usePokemon()
+  const { pokemonsData, searchedPokemonsData, handleSetSearchedPokemonByKeyword } = usePokemon()
   const { handleSetIsShowSearchModal } = useUtils()
+  const [ keyword, setKeyword ] = useState()
 
   const handleClickOutsideModalMain = (event) => {
     handleSetIsShowSearchModal({ isShowSearchModal: false })
@@ -17,26 +18,31 @@ const SearchModal = () => {
   }
   const handleOnInputChange = (event) => {
     console.log(event.target.value)
+    setKeyword(event.target.value)
     handleSetSearchedPokemonByKeyword({ keyword: event.target.value })
   }
 
   useEffect(() => {
-      console.log('searchedPokemonsData', searchedPokemonsData)
-    }, [searchedPokemonsData])
+    return () => {
+      handleSetSearchedPokemonByKeyword({ keyword: "" })
+    }
+  }, [])
 
   return (
     <ModalContainer onClick={handleClickOutsideModalMain}>
       <ModalMain onClick={handleClickInsideModalMain}>
-        <SearchInput placeholder="Find Pokemon" onChange={handleOnInputChange}></SearchInput>
+        <SearchInput placeholder="Find Pokemon" onChange={handleOnInputChange} value={ keyword }></SearchInput>
         <SearchedCardList>
           {searchedPokemonsData.map((pokemon, index) => (
             <Card
               key={index}
               name={pokemon.name}
+              nationalPokedexNumber={ pokemon.nationalPokedexNumber }
               imgUrl={pokemon.imageUrl}
               hp={pokemon.hp}
               attacks={pokemon.attacks}
               weaknesses={pokemon.weaknesses}
+              mode="search"
             />
           ))}
         </SearchedCardList>
@@ -59,15 +65,23 @@ const ModalMain = styled.div`
   position: absolute;
   background: white;
   width: 95%;
+  max-width: 95%;
   height: 95%;
+  max-height: 95%;
   top: 50%;
   left: 50%;
   border-radius: 4px;
   transform: translate(-50%, -50%);
   z-index: 3;
+  display: flex;
+  flex-direction: column;
 `
 
-const SearchInput = styled.input``
+const SearchInput = styled.input`
+  font-family: 'Gaegu';
+  margin: 8px;
+  font-size: 32px;
+`
 
 const SearchedCardList = styled.div``
 
