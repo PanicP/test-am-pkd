@@ -1,20 +1,19 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { useDispatch, useSelector } from 'react-redux'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  isShowModal: false
+  isShowSearchModal: false
 }
 
-export const pokemonSlice = createSlice({
-  name: 'pokemon',
+export const utilsSlice = createSlice({
+  name: 'utils',
   initialState,
   reducers: {
-    setIsShowModal: (state, action) => {
-      state.isShowModal = action.payload.isShowModal
+    setIsShowSearchModal: (state, action) => {
+      state.isShowSearchModal = action.payload.isShowSearchModal
     },
   }
 })
 
-export const { setIsShowModal } = pokemonSlice.actions
+export const { setIsShowSearchModal } = utilsSlice.actions
 
-export default pokemonSlice.reducer
+export default utilsSlice.reducer

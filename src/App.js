@@ -3,19 +3,21 @@ import styled from 'styled-components'
 
 import Card from './components/card/Card'
 import Footer from './components/layout/Footer'
+import SearchModal from './components/modal/SearchModal'
 import usePokemon from './store/pokemon/store'
+import useUtils from './store/utils/store'
 
-const testData = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-const pikachu = {
-  name: 'Pikachu',
-  hp: 110,
-  attacks: [
-    { name: 'attack A', damage: '20+' },
-    { name: 'attack B', damage: '40x' },
-  ],
-  weaknesses: [{ name: 'weakness A' }],
-  imageUrl: 'https://images.pokemontcg.io/ex8/98.png',
-}
+// const testData = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+// const pikachu = {
+//   name: 'Pikachu',
+//   hp: 110,
+//   attacks: [
+//     { name: 'attack A', damage: '20+' },
+//     { name: 'attack B', damage: '40x' },
+//   ],
+//   weaknesses: [{ name: 'weakness A' }],
+//   imageUrl: 'https://images.pokemontcg.io/ex8/98.png',
+// }
 
 const App = () => {
 
@@ -26,21 +28,26 @@ const App = () => {
   // }
 
   const { pokemonsData, handleGetPokemons } = usePokemon()
+  const { isShowSearchModal, handleSetIsShowSearchModal } = useUtils()
 
   useEffect(() => {
     handleGetPokemons()
   }, [])
 
-  useEffect(() => {
-    console.log('pokemonsData', pokemonsData)
-  }, [pokemonsData])
+  // useEffect(() => {
+  //   console.log('pokemonsData', pokemonsData)
+  // }, [pokemonsData])
+
+  // useEffect(() => {
+  //   console.log('isShowSearchModal', isShowSearchModal)
+  // }, [isShowSearchModal])
 
   return (
     <div className="App">
       <MainContainer>
         <HeaderContainer>
           <HeaderLabel>Pokedex</HeaderLabel>
-          <button onClick={handleGetPokemons}>test api</button>
+          <button onClick={() => handleSetIsShowSearchModal({ isShowSearchModal: true })}>test api</button>
         </HeaderContainer>
         <SelectedCardListContainer>
           <SelectedCardList>
@@ -59,6 +66,8 @@ const App = () => {
         </SelectedCardListContainer>
       </MainContainer>
       <Footer />
+      {/* modal */}
+      { isShowSearchModal && <SearchModal /> }
     </div>
   )
 }

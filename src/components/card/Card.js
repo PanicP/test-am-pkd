@@ -43,19 +43,19 @@ const Card = ({ isCompact, name, imgUrl, hp, attacks, weaknesses }) => {
     }
     return [...list]
   }
-  console.log(
-    name, 
-    ' hp: ',
-    calculatedHp,
-    ' str: ',
-    calculatedStr,
-    ' wkn: ',
-    calculatedWeakness,
-    ' dmg: ',
-    calculatedDmg,
-    ' hpn: ',
-    calculatedHappiness
-  )
+  // console.log(
+  //   name, 
+  //   ' hp: ',
+  //   calculatedHp,
+  //   ' str: ',
+  //   calculatedStr,
+  //   ' wkn: ',
+  //   calculatedWeakness,
+  //   ' dmg: ',
+  //   calculatedDmg,
+  //   ' hpn: ',
+  //   calculatedHappiness
+  // )
   return (
     <CardContainer>
       <LeftPart>

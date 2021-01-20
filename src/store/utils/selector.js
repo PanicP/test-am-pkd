@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { get } from 'lodash'
 
-export const isShowModalSelector = () =>
+export const isShowSearchModalSelector = () =>
     createSelector(
         (state) => state.utils,
-        (utils) => get(utils, 'isShowModal', false)
+        (utils) => get(utils, 'isShowSearchModal', false)
     )

@@ -1,23 +1,40 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
-import { getPokemons, getPokemonsTrunk } from './slice'
-import { pokemonsSelector } from './selector'
+import { getPokemonsTrunk, setSearchedPokemonByKeyword } from './slice'
+import {
+  pokemonsSelector,
+  selectedPokemonsSelector,
+  searchedPokemonsSelector,
+} from './selector'
 
 const usePokemon = () => {
   const dispatch = useDispatch()
 
   const pokemonsData = useSelector(useMemo(pokemonsSelector, [dispatch]))
+  const selectedPokemonsData = useSelector(
+    useMemo(selectedPokemonsSelector, [dispatch])
+  )
+  const searchedPokemonsData = useSelector(
+    useMemo(searchedPokemonsSelector, [dispatch])
+  )
 
   const handleGetPokemons = useCallback(() => {
-    // dispatch(getPokemons())
     dispatch(getPokemonsTrunk())
   }, [dispatch])
 
-//   const handleGetPokemons = () => dispatch(getPokemons())
+  const handleSetSearchedPokemonByKeyword = useCallback(
+    ({ keyword }) => {
+      dispatch(setSearchedPokemonByKeyword({ keyword }))
+    },
+    [dispatch]
+  )
 
   return {
     pokemonsData,
+    selectedPokemonsData,
+    searchedPokemonsData,
     handleGetPokemons,
+    handleSetSearchedPokemonByKeyword
   }
 }
 

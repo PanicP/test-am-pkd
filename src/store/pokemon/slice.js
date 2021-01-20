@@ -5,9 +5,9 @@ import { get, isEmpty } from 'lodash'
 import PokemonApi from '../../services/api/pokemon'
 
 const initialState = {
-  data: [],
-  selectedData: [],
-  test: 'sdf',
+  pokemons: [],
+  selectedPokemons: [],
+  searchedPokemons: [],
 }
 
 export const getPokemonsTrunk = createAsyncThunk(
@@ -30,21 +30,35 @@ export const pokemonSlice = createSlice({
       // state = state
       // state.data = [1,2]
     },
+    addSelectedPokemon: (state, action) => {},
+    removeSelectedPokemon: (state, action) => {},
+    setSearchedPokemonByKeyword: (state, action) => {
+      // name and type
+      const keyword = action.payload.keyword
+      const mappedTargetData = state.pokemons.map((pokemon) => (pokemon.name + ' ' + pokemon.type).toLowerCase())
+      const filteredPokemons = state.pokemons.filter((pokemon, index) => mappedTargetData[index].includes(keyword))
+      state.searchedPokemons = filteredPokemons
+    },
     // setPokemons: (state, action) => {
     //     state.selectedData = action.payload.data
     // },
   },
   extraReducers: {
     [getPokemonsTrunk.fulfilled]: (state, action) => {
-      state.data = action.payload
+      state.pokemons = action.payload
     },
     [getPokemonsTrunk.rejected]: (state, action) => {
-      state.data = {}
+      state.pokemons = {}
     },
   },
 })
 
 // const { getPokemons } = pokemonSlice.actions
-export const { getPokemons } = pokemonSlice.actions
+export const {
+  getPokemons,
+  addSelectedPokemon,
+  removeSelectedPokemon,
+  setSearchedPokemonByKeyword,
+} = pokemonSlice.actions
 
 export default pokemonSlice.reducer

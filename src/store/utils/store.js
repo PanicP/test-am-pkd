@@ -1,23 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
-import { isShowModalSelector } from './selector'
-import { setIsShowModal } from './slice'
+import { isShowSearchModalSelector } from './selector'
+import { setIsShowSearchModal } from './slice'
 
 const useUtils = () => {
   const dispatch = useDispatch()
 
-  const isShowModal = useSelector(useMemo(isShowModalSelector, [dispatch]))
-
-  const handleSetIsShowModal = useCallback(() => {
-    // dispatch(getPokemons())
-    dispatch(setIsShowModal())
+  const isShowSearchModal = useSelector(useMemo(isShowSearchModalSelector, [dispatch]))
+  console.log(isShowSearchModal, 'asdlfkjldskf')
+  const handleSetIsShowSearchModal = useCallback(({ isShowSearchModal }) => {
+    dispatch(setIsShowSearchModal({ isShowSearchModal }))
   }, [dispatch])
 
-//   const handleGetPokemons = () => dispatch(getPokemons())
 
   return {
-    isShowModal,
-    handleSetIsShowModal,
+    isShowSearchModal,
+    handleSetIsShowSearchModal,
   }
 }
 
