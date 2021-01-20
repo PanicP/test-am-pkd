@@ -1,10 +1,8 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import { get } from 'lodash'
 
 import Card from './components/card/Card'
 import Footer from './components/layout/Footer'
-import PokemonApi from './services/api/pokemon'
 import usePokemon from './store/pokemon/store'
 
 const testData = [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -46,15 +44,15 @@ const App = () => {
         </HeaderContainer>
         <SelectedCardListContainer>
           <SelectedCardList>
-            {testData.map((data, index) => (
-              // <SelectedCard>{data}</SelectedCard>
+            {/* {testData.map((pokemon, index) => ( */}
+            {pokemonsData.map((pokemon, index) => (
               <Card
                 key={ index }
-                name={pikachu.name}
-                imgUrl={pikachu.imageUrl}
-                hp={pikachu.hp}
-                attacks={pikachu.attacks}
-                weaknesses={pikachu.weaknesses}
+                name={pokemon.name}
+                imgUrl={pokemon.imageUrl}
+                hp={pokemon.hp}
+                attacks={pokemon.attacks}
+                weaknesses={pokemon.weaknesses}
               />
             ))}
           </SelectedCardList>
