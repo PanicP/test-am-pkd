@@ -1,9 +1,11 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { get } from 'lodash'
 
 import Card from './components/card/Card'
 import Footer from './components/layout/Footer'
 import PokemonApi from './services/api/pokemon'
+import usePokemon from './store/pokemon/store'
 
 const testData = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 const pikachu = {
@@ -19,18 +21,28 @@ const pikachu = {
 
 const App = () => {
 
-  const getPokemons = async () => {
-    const data = await PokemonApi.getPokemons()
-    const cards = get(data, 'data.cards', [])
-    console.log(cards)
-  }
+  // const getPokemons = async () => {
+  //   const data = await PokemonApi.getPokemons()
+  //   const cards = get(data, 'data.cards', [])
+  //   console.log(cards)
+  // }
+
+  const { pokemonsData, handleGetPokemons } = usePokemon()
+
+  useEffect(() => {
+    handleGetPokemons()
+  }, [])
+
+  useEffect(() => {
+    console.log('pokemonsData', pokemonsData)
+  }, [pokemonsData])
 
   return (
     <div className="App">
       <MainContainer>
         <HeaderContainer>
           <HeaderLabel>Pokedex</HeaderLabel>
-          <button onClick={getPokemons}>test api</button>
+          <button onClick={handleGetPokemons}>test api</button>
         </HeaderContainer>
         <SelectedCardListContainer>
           <SelectedCardList>

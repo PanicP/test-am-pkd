@@ -1,22 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
-import { getPokemons } from './slice'
+import { getPokemons, getPokemonsTrunk } from './slice'
 import { pokemonsSelector } from './selector'
 
-export const useHostel = () => {
-    const dispatch = useDispatch()
+const usePokemon = () => {
+  const dispatch = useDispatch()
 
-    const pokemonsData = useSelector(useMemo(pokemonsSelector, [dispatch]))
+  const pokemonsData = useSelector(useMemo(pokemonsSelector, [dispatch]))
 
-    const handleGetPokemons = useCallback(
-        ({ data }) => {
-            dispatch(getPokemons({ data }))
-        },
-        [dispatch]
-    )
+  const handleGetPokemons = useCallback(() => {
+    // dispatch(getPokemons())
+    dispatch(getPokemonsTrunk())
+  }, [dispatch])
 
-    return {
-      pokemonsData,
-      handleGetPokemons
-    }
+//   const handleGetPokemons = () => dispatch(getPokemons())
+
+  return {
+    pokemonsData,
+    handleGetPokemons,
+  }
 }
+
+export default usePokemon
