@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import cuteImg from '../../static/image/cute.png'
 import { colors } from '../../static/color'
 import Gauge from './Gauge'
-import useHover from '../utils/useHover'
+// import useHover from '../utils/useHover'
+import useHover from '../utils/useHover2'
 import usePokemon from '../../store/pokemon/store'
 
 const hpCalculation = ({ hp }) => (hp > 100 ? 100 : hp < 0 ? 0 : hp)
@@ -31,7 +32,7 @@ const Card = ({
   attacks,
   weaknesses,
 }) => {
-  // console.log(isCompact, name, imgUrl, hp, attacks, weaknesses)
+
   const calculatedHp = hpCalculation({ hp: parseInt(hp) })
   const calculatedStr = strCalculation({
     attLength: attacks ? attacks.length : 0,
@@ -63,9 +64,10 @@ const Card = ({
     return [...list]
   }
 
-  const [refCard, isCardHovered] = useHover()
-  const [refAddButton, isAddButtonHovered] = useHover()
-  const [refDeleteButton, isDeleteHovered] = useHover()
+  // const [refCard, isCardHovered] = useHover()
+  const [isCardHovered, bind] = useHover()
+  // const [refAddButton, isAddButtonHovered] = useHover()
+  // const [refDeleteButton, isDeleteHovered] = useHover()
   const { handleAddSelectedPokemon, handleRemoveSelectedPokemon } = usePokemon()
 
   const handleAdd = () => {
@@ -77,16 +79,22 @@ const Card = ({
     handleRemoveSelectedPokemon({ nationalPokedexNumber })
   }
 
+  useEffect(() => {
+    console.log(name, isCardHovered)
+  }, [isCardHovered])
   return (
-    <CardContainer ref={refCard} mode={mode}>
+    <CardContainer 
+    {...bind}
+    // ref={refCard} 
+    mode={mode}>
       <LeftPart>
         <CardPicture src={imgUrl} alt={name} width="150" height="220" />
       </LeftPart>
       <RightPart>
         {
-          // (isCardHovered || isAddButtonHovered) &&
+          (isCardHovered) &&
           mode === 'default' && (
-            <AddButton ref={refAddButton} onClick={handleAdd}>
+            <AddButton onClick={handleAdd}>
               Add
             </AddButton>
           )
@@ -94,7 +102,9 @@ const Card = ({
         {
           // (isCardHovered || isDeleteHovered) &&
           mode === 'compact' && (
-            <DeleteButton ref={refDeleteButton} onClick={handleRemove}>
+            <DeleteButton 
+            // ref={refDeleteButton} 
+            onClick={handleRemove}>
               X
             </DeleteButton>
           )
