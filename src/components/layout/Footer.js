@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import useUtils from '../../store/utils/store'
-import { colors } from '../../static/color'
+import useUtils from '@/store/utils/store'
+import { colors } from '@/static/color'
 
 const Footer = () => {
   const { handleSetIsShowSearchModal } = useUtils()

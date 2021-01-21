@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import Card from '../card/Card'
-import searchImg from '../../static/image/search.png'
-import useUtils from '../../store/utils/store'
-import usePokemon from '../../store/pokemon/store'
-import { colors } from '../../static/color'
+import Card from '@/components/card/Card'
+import searchImg from '@/static/image/search.png'
+import useUtils from '@/store/utils/store'
+import usePokemon from '@/store/pokemon/store'
+import { colors } from '@/static/color'
 
 const SearchModal = () => {
   const {
@@ -43,7 +43,12 @@ const SearchModal = () => {
             onChange={handleOnInputChange}
             value={keyword}
           />
-          <SearchImage src={searchImg} alt="search.png" width="36" height="36" />
+          <SearchImage
+            src={searchImg}
+            alt="search.png"
+            width="36"
+            height="36"
+          />
         </SearchInputWrapper>
         <SearchedCardList>
           {searchedPokemonsData.map((pokemon, index) => (

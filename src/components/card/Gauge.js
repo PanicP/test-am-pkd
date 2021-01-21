@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../static/color'
+import { colors } from '@/static/color'
 
 const Gauge = ({ label, percentage }) => (
   <GaugeContainer>

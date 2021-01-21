@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 
-import PokemonApi from '../../services/api/pokemon'
+import PokemonApi from '@/services/api/pokemon'
 
 const initialState = {
   pokemons: [],

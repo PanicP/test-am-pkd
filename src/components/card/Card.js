@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import cuteImg from '../../static/image/cute.png'
-import { colors } from '../../static/color'
+import cuteImg from '@/static/image/cute.png'
+import { colors } from '@/static/color'
 import Gauge from './Gauge'
 // import useHover from '../utils/useHover'
-import useHover from '../utils/useHover2'
-import usePokemon from '../../store/pokemon/store'
+import useHover from '@/components/utils/useHover2'
+import usePokemon from '@/store/pokemon/store'
 
 const hpCalculation = ({ hp }) => (hp > 100 ? 100 : hp < 0 ? 0 : hp)
 

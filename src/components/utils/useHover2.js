@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
 const useHover = () => {
-  const [isHovered, setHovered] = React.useState(false);
+  const [isHovered, setHovered] = React.useState(false)
 
   const bind = React.useMemo(
     () => ({
       onMouseEnter: (e) => setHovered(true),
-      onMouseLeave: (e) =>setHovered(false),
+      onMouseLeave: (e) => setHovered(false),
     }),
     []
-  );
+  )
 
-  return [isHovered, bind];
+  return [isHovered, bind]
 }
 
-export default useHover;
+export default useHover

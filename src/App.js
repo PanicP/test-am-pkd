@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 
-import Card from './components/card/Card'
-import Footer from './components/layout/Footer'
-import SearchModal from './components/modal/SearchModal'
-import usePokemon from './store/pokemon/store'
-import useUtils from './store/utils/store'
+import Card from '@/components/card/Card'
+import Footer from '@/components/layout/Footer'
+import SearchModal from '@/components/modal/SearchModal'
+import usePokemon from '@/store/pokemon/store'
+import useUtils from '@/store/utils/store'
 
 const App = () => {
 

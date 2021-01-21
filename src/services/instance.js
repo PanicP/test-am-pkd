@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from '../static/config'
+import config from '@/static/config'
 
 const instance = axios.create()
 
