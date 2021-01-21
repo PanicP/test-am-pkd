@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styled from 'styled-components'
 import cuteImg from '@/static/image/cute.png'
 import { colors } from '@/static/color'
@@ -79,9 +78,10 @@ const Card = ({
     handleRemoveSelectedPokemon({ nationalPokedexNumber })
   }
 
-  useEffect(() => {
-    console.log(name, isCardHovered)
-  }, [isCardHovered])
+  // useEffect(() => {
+  //   console.log(name, isCardHovered)
+  // }, [isCardHovered])
+
   return (
     <CardContainer 
     {...bind}

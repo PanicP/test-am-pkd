@@ -9,8 +9,8 @@ import useUtils from '@/store/utils/store'
 
 const App = () => {
 
-  const { pokemonsData, selectedPokemonsData, handleGetPokemons, handleSetSearchedPokemonByKeyword } = usePokemon()
-  const { isShowSearchModal, handleSetIsShowSearchModal } = useUtils()
+  const { selectedPokemonsData, handleGetPokemons } = usePokemon()
+  const { isShowSearchModal } = useUtils()
 
   // constructor
   useEffect(() => {

@@ -44,5 +44,10 @@
   },
   "resolutions": {
     "styled-components": "^5"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/src/$1"
+    }
   }
 }
