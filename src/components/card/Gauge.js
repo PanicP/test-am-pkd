@@ -34,7 +34,7 @@ const PercentageGaugeContainer = styled.div`
 `
 
 const PercentageGauge = styled.div`
-  width: ${ props => props.percentage }%;
+  width: ${(props) => props.percentage}%;
   border-radius: 1.5em;
   background-color: ${colors.levelTubeValueBackground};
   height: 1.5em;

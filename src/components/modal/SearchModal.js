@@ -9,7 +9,6 @@ import { colors } from '@/static/color'
 
 const SearchModal = () => {
   const {
-    pokemonsData,
     searchedPokemonsData,
     handleSetSearchedPokemonByKeyword,
   } = usePokemon()
@@ -23,7 +22,6 @@ const SearchModal = () => {
     event.stopPropagation()
   }
   const handleOnInputChange = (event) => {
-    console.log(event.target.value)
     setKeyword(event.target.value)
     handleSetSearchedPokemonByKeyword({ keyword: event.target.value })
   }

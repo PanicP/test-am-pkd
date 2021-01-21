@@ -8,19 +8,12 @@ import usePokemon from '@/store/pokemon/store'
 import useUtils from '@/store/utils/store'
 
 const App = () => {
-
   const { selectedPokemonsData, handleGetPokemons } = usePokemon()
   const { isShowSearchModal } = useUtils()
 
-  // constructor
   useEffect(() => {
     handleGetPokemons()
-    // handleSetSearchedPokemonByKeyword({ keyword: ' ' })
   }, [])
-
-  // useEffect(() => {
-  //   console.log('isShowSearchModal', isShowSearchModal)
-  // }, [isShowSearchModal])
 
   return (
     <div className="App">
@@ -30,12 +23,11 @@ const App = () => {
         </HeaderContainer>
         <SelectedCardListContainer>
           <SelectedCardList>
-            {/* {testData.map((pokemon, index) => ( */}
             {selectedPokemonsData.map((pokemon, index) => (
               <Card
-                key={ index }
+                key={index}
                 name={pokemon.name}
-                nationalPokedexNumber={ pokemon.nationalPokedexNumber }
+                nationalPokedexNumber={pokemon.nationalPokedexNumber}
                 imgUrl={pokemon.imageUrl}
                 hp={pokemon.hp}
                 attacks={pokemon.attacks}
@@ -48,14 +40,12 @@ const App = () => {
       </MainContainer>
       <Footer />
       {/* modal */}
-      { isShowSearchModal && <SearchModal /> }
+      {isShowSearchModal && <SearchModal />}
     </div>
   )
 }
 
-const MainContainer = styled.div`
-
-`
+const MainContainer = styled.div``
 
 const HeaderContainer = styled.div`
   display: flex;

@@ -5,11 +5,14 @@ import { colors } from '@/static/color'
 const Footer = () => {
   const { handleSetIsShowSearchModal } = useUtils()
 
+  const handleClickAddButton = () => {
+    handleSetIsShowSearchModal({ isShowSearchModal: true })
+  }
   return (
     <>
-      <FooterContainer>
+      <FooterContainer className="footer-container">
         <AddButtonContainer>
-          <AddButton onClick={() => handleSetIsShowSearchModal({ isShowSearchModal: true })}>
+          <AddButton className="footer-add-button" onClick={() => handleClickAddButton()}>
             <PlusIcon>+</PlusIcon>
           </AddButton>
         </AddButtonContainer>

@@ -17,6 +17,9 @@
     "react-scripts": "4.0.1",
     "styled-components": "5.2.1"
   },
+  "devDependencies": {
+    "craco-alias": "2.1.1"
+  },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
@@ -46,8 +49,12 @@
     "styled-components": "^5"
   },
   "jest": {
-    "moduleNameMapper": {
-      "@/(.*)": "<rootDir>/src/$1"
-    }
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
   }
 }

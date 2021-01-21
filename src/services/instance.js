@@ -25,5 +25,5 @@ const httpPokemon = (options) =>
   instance({ baseURL: config.apiPokemonBaseUrl, ...options })
 
 export default {
-  httpPokemon
+  httpPokemon,
 }

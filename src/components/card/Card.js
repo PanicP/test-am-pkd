@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import cuteImg from '@/static/image/cute.png'
 import { colors } from '@/static/color'
 import Gauge from './Gauge'
-// import useHover from '../utils/useHover'
-import useHover from '@/components/utils/useHover2'
+import useHover from '@/components/utils/useHover'
 import usePokemon from '@/store/pokemon/store'
 
 const hpCalculation = ({ hp }) => (hp > 100 ? 100 : hp < 0 ? 0 : hp)
@@ -31,7 +30,6 @@ const Card = ({
   attacks,
   weaknesses,
 }) => {
-
   const calculatedHp = hpCalculation({ hp: parseInt(hp) })
   const calculatedStr = strCalculation({
     attLength: attacks ? attacks.length : 0,
@@ -63,14 +61,10 @@ const Card = ({
     return [...list]
   }
 
-  // const [refCard, isCardHovered] = useHover()
   const [isCardHovered, bind] = useHover()
-  // const [refAddButton, isAddButtonHovered] = useHover()
-  // const [refDeleteButton, isDeleteHovered] = useHover()
   const { handleAddSelectedPokemon, handleRemoveSelectedPokemon } = usePokemon()
 
   const handleAdd = () => {
-    console.log('add')
     handleAddSelectedPokemon({ nationalPokedexNumber })
   }
 
@@ -78,37 +72,18 @@ const Card = ({
     handleRemoveSelectedPokemon({ nationalPokedexNumber })
   }
 
-  // useEffect(() => {
-  //   console.log(name, isCardHovered)
-  // }, [isCardHovered])
-
   return (
-    <CardContainer 
-    {...bind}
-    // ref={refCard} 
-    mode={mode}>
+    <CardContainer className="card-container" mode={mode} {...bind}>
       <LeftPart>
         <CardPicture src={imgUrl} alt={name} width="150" height="220" />
       </LeftPart>
       <RightPart>
-        {
-          (isCardHovered) &&
-          mode === 'default' && (
-            <AddButton onClick={handleAdd}>
-              Add
-            </AddButton>
-          )
-        }
-        {
-          // (isCardHovered || isDeleteHovered) &&
-          mode === 'compact' && (
-            <DeleteButton 
-            // ref={refDeleteButton} 
-            onClick={handleRemove}>
-              X
-            </DeleteButton>
-          )
-        }
+        {isCardHovered && mode === 'default' && (
+          <AddButton onClick={handleAdd}>Add</AddButton>
+        )}
+        {isCardHovered && mode === 'compact' && (
+          <DeleteButton onClick={handleRemove}>X</DeleteButton>
+        )}
         <CardTitle>{name.toUpperCase()}</CardTitle>
         <Stat mode={mode}>
           <Gauge label="HP" percentage={calculatedHp} />
@@ -120,25 +95,9 @@ const Card = ({
     </CardContainer>
   )
 }
-/* width: ${ props => props.mode === 'compact' ? calc(50% - 16px) : calc(100% - 16px) }; */
-// const CardContainer = styled.div`
-//   display: flex;
-//   position: relative;
-//   width: calc(50% - 16px);
-//   border: 3px solid ${ colors.cardBoxShadow };
-//   border-radius: 1px;
-//   margin: 4px;
-//   background-color: ${colors.cardBackground};
 
-//   :hover {
-//     border: 3px solid ${ colors.cardBoxShadowHover };
-//   }
-// `
-
-// width: calc(100% - 8px);
 const CardContainer = styled.div`
   display: flex;
-  /* flex: 1; */
   position: relative;
   ${(props) =>
     props.mode === 'compact'

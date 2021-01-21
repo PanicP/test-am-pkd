@@ -6,12 +6,16 @@ import { setIsShowSearchModal } from './slice'
 const useUtils = () => {
   const dispatch = useDispatch()
 
-  const isShowSearchModal = useSelector(useMemo(isShowSearchModalSelector, [dispatch]))
-  console.log(isShowSearchModal, 'asdlfkjldskf')
-  const handleSetIsShowSearchModal = useCallback(({ isShowSearchModal }) => {
-    dispatch(setIsShowSearchModal({ isShowSearchModal }))
-  }, [dispatch])
+  const isShowSearchModal = useSelector(
+    useMemo(isShowSearchModalSelector, [dispatch])
+  )
 
+  const handleSetIsShowSearchModal = useCallback(
+    ({ isShowSearchModal }) => {
+      dispatch(setIsShowSearchModal({ isShowSearchModal }))
+    },
+    [dispatch]
+  )
 
   return {
     isShowSearchModal,

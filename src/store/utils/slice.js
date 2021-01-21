@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  isShowSearchModal: false
+  isShowSearchModal: false,
 }
 
 export const utilsSlice = createSlice({
@@ -11,7 +11,7 @@ export const utilsSlice = createSlice({
     setIsShowSearchModal: (state, action) => {
       state.isShowSearchModal = action.payload.isShowSearchModal
     },
-  }
+  },
 })
 
 export const { setIsShowSearchModal } = utilsSlice.actions
